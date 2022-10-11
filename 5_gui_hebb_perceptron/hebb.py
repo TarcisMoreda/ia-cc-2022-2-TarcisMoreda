@@ -1,6 +1,3 @@
-from mimetypes import init
-
-
 class hebb:
 	def __init__(self, quant_pesos:int) -> None:
 		self.pesos = []

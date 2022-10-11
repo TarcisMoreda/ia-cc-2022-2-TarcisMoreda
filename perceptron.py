@@ -13,7 +13,7 @@ class perceptron:
 			diff = 0
 
 			for i in range(len(entradas)):
-				saida = self.mcculloch(entradas[i])
+				saida = self.mcculloch(entradas[i], target[i])
 				if saida!=target[i]:
 					for j in range(len(self.pesos)-1):
 						self.pesos[j] += self.taxa*target[i]*entradas[i][j]
@@ -26,7 +26,7 @@ class perceptron:
 
 		return epoch
 
-	def mcculloch(self, entradas:tuple) -> int:
+	def mcculloch(self, entradas:tuple, target:int) -> int:
 		saida = 0
 		for i in range(len(entradas)):
 			saida += entradas[i]*self.pesos[i]
@@ -39,5 +39,5 @@ class perceptron:
 		else:
 			return 0
 
-	def run(self, entradas:tuple) -> int:
-		return self.mcculloch(entradas)
+	def run(self, entradas:tuple, target:int) -> int:
+		return self.mcculloch(entradas, target)

@@ -23,6 +23,7 @@ class perceptron:
 			epoch += 1
 			if diff==len(entradas):
 				cond = False
+			print(epoch)
 
 		return epoch
 

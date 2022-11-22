@@ -42,20 +42,37 @@ def pmx_crossover():
     corte2 = random.randint(
         len(father_line_edit.text()) - corte1, len(father_line_edit.text()))
 
+    mae = []
+    pai = []
     res1 = []
     res2 = []
 
     for i in range(len(father_line_edit.text())):
-        if i < corte1:
-            res1.append(str(father_line_edit.text()[i]))
-            res2.append(str(mother_line_edit.text()[i]))
-        elif i < corte2:
-            res1.append(str(mother_line_edit.text()[i]))
-            res2.append(str(father_line_edit.text()[i]))
-        else:
-            res1.append(str(father_line_edit.text()[i]))
-            res2.append(str(mother_line_edit.text()[i]))
+        mae.append(mother_line_edit.text()[i])
+        pai.append(father_line_edit.text()[i])
+    
+    count = 0
+    for i in pai:
+        if count==corte1:
+            break
+        if i not in mae[corte1:corte2]:
+            res1.append(i)
+            count += 1
 
+    count = 0
+    for i in mae:
+        if count==corte1:
+            break
+        if i not in pai[corte1:corte2]:
+            res2.append(i)
+            count += 1
+
+    res1.extend(mae[corte1:corte2])
+    res1.extend([x for x in pai if x not in res1])
+    
+    res2.extend(pai[corte1:corte2])
+    res2.extend([x for x in mae if x not in res2])
+    
     res = ["", "", "", "", "", ""]
 
     for i in range(len(father_line_edit.text())):
@@ -68,6 +85,7 @@ def pmx_crossover():
         else:
             res[2] += res1[i]
             res[5] += res2[i]
+
 
     return res
 
